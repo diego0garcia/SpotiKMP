@@ -1,6 +1,7 @@
 package org.example.project
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +38,6 @@ import spotikmp.composeapp.generated.resources.scat_pack
 import spotikmp.composeapp.generated.resources.stop
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.Resource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,21 +45,22 @@ import org.jetbrains.compose.resources.Resource
 fun App() {
 
     var selected_song by remember { mutableStateOf<Cancion?>(null) }
-
-    var play_song by remember { mutableStateOf(true) }
+    var play_song by remember { mutableStateOf(false) }
 
     var song_list: MutableList<Cancion> = remember {mutableStateListOf(
-        Cancion("Hasta Que Dios Diga",3.15,Res.drawable.hqdd),
-        Cancion("3 am",2.32,Res.drawable.sauce_boyz),
-        Cancion("Scat Pack",3.02,Res.drawable.scat_pack),
-        Cancion("2K16",2.58,Res.drawable._2k16)
+        Cancion("Hasta Que Dios Diga",3.15,Res.drawable.hqdd, "Anuel AA",play_song),
+        Cancion("3 am",2.32,Res.drawable.sauce_boyz, "Eladio Carrión",play_song),
+        Cancion("Scat Pack",3.02,Res.drawable.scat_pack, "Clarent",play_song),
+        Cancion("2K16",2.58,Res.drawable._2k16, "Omar Courtz",play_song)
     )}
 
     fun delete(cancion: Cancion){
-       song_list.remove(cancion)
+        song_list.remove(cancion)
+        selected_song = null
     }
 
     fun play(cancion: Cancion){
+        play_song = true
         selected_song = cancion
     }
 
@@ -86,51 +87,66 @@ fun App() {
                 BottomAppBar (
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.height(100.dp)
                 ) {
-                    //Contenedor con los botones de accion
-                    Row (
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
-                        verticalAlignment = Alignment.Top,
-                    ) {
-                        //Previus
-                        Button(
-                            onClick = {
-
-                            }
-                        ){
-                            Icon(
-                                painter = painterResource(Res.drawable.previous_1),
-                                contentDescription = "Play",
-                                tint = Color.White,
-                                modifier = Modifier.size(16.dp)
-                            )
+                    Column (
+                        modifier = Modifier.fillMaxWidth().fillMaxWidth()
+                    ){
+                        //Contenedor de la barra de reproduccion
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                            ){
+                            if (selected_song != null){SongProgresBar(selected_song!!, play_song)}
                         }
-                        //Play
-                        Button(
-                            onClick = {
-                                play_song = !play_song
+                        //Contenedor con los botones de accion
+                        Row (
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+                            verticalAlignment = Alignment.Top,
+                        ) {
+                            //Previus
+                            Button(
+                                onClick = {
+                                    val pos = song_list.lastIndexOf(selected_song)
+                                    if (pos == 0){selected_song = song_list.get(song_list.size - 1)}else{selected_song = song_list[pos - 1]}
+                                }
+                            ){
+                                Icon(
+                                    painter = painterResource(Res.drawable.previous_1),
+                                    contentDescription = "Play",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(16.dp)
+                                )
                             }
-                        ){
-                            Icon(
-                                painter = painterResource(if (play_song){Res.drawable.play}else{Res.drawable.stop}),
-                                contentDescription = "Play",
-                                tint = Color.White,
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                        //Next
-                        Button(
-                            onClick = {
-
+                            //Play
+                            Button(
+                                onClick = {
+                                    play_song = !play_song
+                                }
+                            ){
+                                Icon(
+                                    painter = painterResource(if (!play_song){Res.drawable.play}else{Res.drawable.stop}),
+                                    contentDescription = "Play",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(16.dp)
+                                )
                             }
-                        ){
-                            Icon(
-                                painter = painterResource(Res.drawable.next_1),
-                                contentDescription = "Play",
-                                tint = Color.White,
-                                modifier = Modifier.size(16.dp)
-                            )
+                            //Next
+                            Button(
+                                onClick = {
+                                    val pos = song_list.lastIndexOf(selected_song)
+                                    if (pos == song_list.size -1){selected_song = song_list.get(0)}else{selected_song = song_list[pos + 1]}
+                                }
+                            ){
+                                Icon(
+                                    painter = painterResource(Res.drawable.next_1),
+                                    contentDescription = "Play",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
                         }
                     }
                 }

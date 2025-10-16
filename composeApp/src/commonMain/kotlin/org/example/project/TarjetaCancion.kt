@@ -32,8 +32,9 @@ data class Cancion(
     val nombre: String,
     val duracion: Double,
     val imagen: DrawableResource,
-    val url: String? = null,
-    val activo: Boolean = false
+    val asrtista: String,
+    val activo: Boolean,
+    val url: String? = null
 )
 
 @Composable
@@ -52,7 +53,7 @@ fun TarjetaCancion(
                 MaterialTheme.colorScheme.primary
         ),
         onClick = {
-            //playAudio()
+            onPlay(cancion)
         }
 
     ) {
@@ -77,7 +78,7 @@ fun TarjetaCancion(
             )
 
             Text(
-                cancion.duracion.toString() + "s"
+                cancion.asrtista
             )
 
             Row(
