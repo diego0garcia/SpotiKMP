@@ -15,8 +15,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import kotlinproject.composeapp.generated.resources.Res
-import kotlinproject.composeapp.generated.resources.dafault_song
+import spotikmp.composeapp.generated.resources.Res
+import spotikmp.composeapp.generated.resources.dafault_song
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
