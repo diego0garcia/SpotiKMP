@@ -1,4 +1,4 @@
-rootProject.name = "SpotiKMP"
+rootProject.name = "SpotyKMP"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
