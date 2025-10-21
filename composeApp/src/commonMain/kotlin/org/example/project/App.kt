@@ -30,6 +30,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.example.project.components.PlaySong
+import org.example.project.components.SongProgresBar
+import org.example.project.components.TarjetaCancion
+import org.example.project.utils.Cancion
 import spotikmp.composeapp.generated.resources.Res
 import spotikmp.composeapp.generated.resources._2k16
 import spotikmp.composeapp.generated.resources.hqdd
@@ -101,7 +105,9 @@ fun App() {
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center,
                             ){
-                            if (selected_song != null){SongProgresBar(selected_song!!, play_song)}
+                            if (selected_song != null){
+                                SongProgresBar(selected_song!!, play_song)
+                            }
                         }
                         //Contenedor con los botones de accion
                         Row (
@@ -169,8 +175,8 @@ fun App() {
                     items(song_list.size){
                         TarjetaCancion(
                             song_list[it],
-                            {delete(it)},
-                            { play(it)}
+                            { delete(it) },
+                            { play(it) }
                         )
                     }
                 }

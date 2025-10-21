@@ -1,4 +1,4 @@
-package org.example.project
+package org.example.project.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,19 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.example.project.utils.Cancion
 import spotikmp.composeapp.generated.resources.Res
 import spotikmp.composeapp.generated.resources.recycle_bin
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
-data class Cancion(
-    val nombre: String,
-    val duracion: Double,
-    val imagen: DrawableResource,
-    val asrtista: String,
-    val activo: Boolean,
-    val url: String? = null
-)
 
 @Composable
 fun TarjetaCancion(

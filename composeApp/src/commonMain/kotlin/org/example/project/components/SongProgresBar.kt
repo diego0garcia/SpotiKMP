@@ -1,4 +1,4 @@
-package org.example.project
+package org.example.project.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import org.example.project.utils.Cancion
 
 @Composable
 fun SongProgresBar(cancion: Cancion, playing: Boolean) {

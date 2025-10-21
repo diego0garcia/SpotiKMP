@@ -1,4 +1,4 @@
-package org.example.project
+package org.example.project.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.example.project.utils.Cancion
 import spotikmp.composeapp.generated.resources.Res
 import spotikmp.composeapp.generated.resources.dafault_song
 import org.jetbrains.compose.resources.painterResource
