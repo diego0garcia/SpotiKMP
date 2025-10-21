@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.example.project.utils.Cancion
+import org.example.project.utils.Song
 import spotikmp.composeapp.generated.resources.Res
 import spotikmp.composeapp.generated.resources.recycle_bin
 import org.jetbrains.compose.resources.painterResource
@@ -31,21 +31,21 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun TarjetaCancion(
-    cancion: Cancion,
-    onBorar: (Cancion) -> Unit,
-    onPlay: (Cancion) -> Unit
+    song: Song,
+    onBorar: (Song) -> Unit,
+    onPlay: (Song) -> Unit
 ){
     Card(
         modifier = Modifier.fillMaxWidth(),
         //elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (cancion.activo)
+            containerColor = if (song.activo)
                 MaterialTheme.colorScheme.background
             else
                 MaterialTheme.colorScheme.primary
         ),
         onClick = {
-            onPlay(cancion)
+            onPlay(song)
         }
 
     ) {
@@ -58,19 +58,19 @@ fun TarjetaCancion(
             )
         ){
             Image(
-                painter = painterResource(cancion.imagen),
-                contentDescription = cancion.nombre,
+                painter = painterResource(song.imagen),
+                contentDescription = song.nombre,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(100.dp).size(100.dp).padding(end = 12.dp, top = 12.dp).clip(RoundedCornerShape(28.dp))
             )
 
             Text(
-                cancion.nombre,
+                song.nombre,
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                cancion.asrtista
+                song.asrtista
             )
 
             Row(
@@ -78,7 +78,7 @@ fun TarjetaCancion(
                 //modifier = Modifier.
             ) {
                 Button(
-                    onClick = {onBorar(cancion)}
+                    onClick = {onBorar(song)}
                 ){
                     Icon(
                         painter = painterResource(Res.drawable.recycle_bin),

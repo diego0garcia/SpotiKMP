@@ -17,22 +17,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import org.example.project.utils.Cancion
+import org.example.project.utils.Song
+import org.example.project.viewmodels.MainViewModel
+import org.example.project.viewmodels.SoundProgressBarViewModel
 
 @Composable
-fun SongProgresBar(cancion: Cancion, playing: Boolean) {
+fun SongProgressBar(song: Song, playing: Boolean, viewModel: SoundProgressBarViewModel) {
     var currentProgress by remember { mutableFloatStateOf(0.00f) }
 
     LaunchedEffect ( playing){
         if (playing){
-            while (playing and (currentProgress < cancion.duracion)){
+            while (playing and (currentProgress < song.duracion)){
                 delay(1000)
                 currentProgress = currentProgress + 0.01f
             }
         }
     }
 
-    LaunchedEffect(cancion){
+    LaunchedEffect(song){
         currentProgress = 0.00f
     }
 
@@ -45,10 +47,10 @@ fun SongProgresBar(cancion: Cancion, playing: Boolean) {
             horizontalArrangement = Arrangement.SpaceBetween
         ){
             Text("${(currentProgress * 100).toInt() / 100.00f}")
-            Text(cancion.duracion.toString() + "s")
+            Text(song.duracion.toString() + "s")
         }
         LinearProgressIndicator(
-            progress = { currentProgress / cancion.duracion.toFloat() },
+            progress = { currentProgress / song.duracion.toFloat() },
             modifier = Modifier.fillMaxWidth(),
         )
     }
